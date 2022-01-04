@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+spring通过XML注入方式：
+
+通过有参构造注入：
+<bean id="car" class="spring.day1.demo3.car">                                  此标签创建对象
+    <constructor-arg name="name" value="宝马"></constructor-arg>                给构造器参数（需要有参构造器）
+    <constructor-arg name="price" value="500000"></constructor-arg>            给构造器参数（需要有参构造器）
+</bean>
+
+p名称空间注入
+
+在beans标签设置p名称空间后简化property标签的形式（需要set方法）
+普通属性：p:属性名="值"
+对象属性: p:属性名-ref="值"
+
+<bean id="emp" class="com.atguigu.spring5.bean.Emp" p:name="namea" p:gender="man" p:dept-ref="dept"></bean>
+<bean id="dept" class="com.atguigu.spring5.bean.Dept" p:dname="dept1"></bean>
+
+通过set注入和外部bean注入：
+
+<bean id="emp" class="com.atguigu.spring5.bean.Emp">    此标签创建对象
+    <property name="ename" value="namea"></property>    变量注入（需要有set方法）
+    <property name="gender" value="man"></property>     变量注入（需要有set方法）
+    <property name="dept" ref="dept"></property>        外部bean注入（需要有set方法）
+</bean>
+<bean id="dept" class="com.atguigu.spring5.bean.Dept">  被注入的bean
+    <property name="dname" value="dept1"></property>
+</bean>
+
+
+通过set注入和内部bean注入：
+
+<bean id="emp" class="com.atguigu.spring5.bean.Emp">  此标签创建对象
+<!--变量注入（需要有set方法）：           <property name="ename" value="namea"></property>                -->
+<!--变量注入：（需要有set方法）           <property name="gender" value="man"></property>                 -->
+<!--内部bean注入：（需要有set方法）       <property name="dept">                                          -->
+<!--内部bean注入：（需要有set方法）           <bean id="dept" class="com.atguigu.spring5.bean.Dept">      -->
+<!--内部bean注入：（需要有set方法）               <property name="dname" value="dept1"></property>        -->
+<!--内部bean注入：（需要有set方法）           </bean>                                                     -->
+<!--内部bean注入：（需要有set方法）       </property>                                                     -->
+</bean>
+
+
+全注解开发
+
+
+
+
+创建实例：
+@Component
+@Service
+@Controller
+@Repository
+*以上四个注解功能一样，皆用于创建实例
+
+@Autowired 按照类型注入
+@Resource  按照类型/名称注入
+@Value     注入普通属性
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
